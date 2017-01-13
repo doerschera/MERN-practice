@@ -49,8 +49,10 @@ export default class Post extends React.Component {
   render() {
     return (
       <div>
-        <h2>{this.state.post.title}</h2>
-        <p>{this.state.post.content}</p>
+        <div className="well">
+          <h2>{this.state.post.title}</h2>
+          <p>{this.state.post.content}</p>
+        </div>
         <Comments
           comments={this.state.post.comments}
           comment={this.state.comment}
