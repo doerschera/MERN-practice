@@ -38,14 +38,14 @@ router.get('/api/:subreddit/:id', (req, res) => {
 })
 
 router.post('/api/:subreddit/new', (req, res) => {
-
+	let subreddit = req.params.subreddit;
 	let title = req.body.title;
 	let content = req.body.content;
 
 	let entry = new Post({
 		title: title,
 		content: content,
-		subredditId: 'austin',
+		subredditId: subreddit,
 		comments: []
 	})
 
@@ -63,8 +63,12 @@ router.post('/api/:subreddit/:id/new', (req, res) => {
 
 	console.log(comment, id);
 
-	Post.findOneAndUpdate({_id: id}, {$push: {comments: comment}}).exec((err) => {
-		if(err) console.log(err);
+	Post.findOneAndUpdate({_id: id}, {$push: {comments: comment}}).exec((err, doc) => {
+		Post.findOne({_id: id}, (err, result) => {
+			if(err) console.log(err);
+
+			res.send(result);
+		});
 	})
 
 })

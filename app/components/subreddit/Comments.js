@@ -2,13 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 export default class Comments extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      comment: ''
-    }
-  }
 
   displayComments() {
     let comments;
@@ -25,7 +18,7 @@ export default class Comments extends React.Component {
     return (
       <div>
         <div>
-          {this.displayComments}
+          {this.displayComments()}
         </div>
         <form>
           <textarea

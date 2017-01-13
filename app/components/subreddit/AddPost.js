@@ -27,7 +27,12 @@ export default class AddPost extends React.Component {
 		axios.post('/api/'+this.props.params.subredditId+'/new', {
       title: this.state.newPostTitle,
       content: this.state.newPostContent
-    }).then((response) => console.log(response));
+    }).then((response) => {
+      this.setState({
+        newPostTitle: '',
+        newPostContent: ''
+      })
+    });
 	}
 
   render() {
