@@ -12,7 +12,7 @@ export default class Post extends React.Component {
 
   componentWillMount() {
     console.log('getting post');
-    axios.get('/api/'+this.props.params.postId)
+    axios.get('/api/'+this.props.params.subredditId+'/'+this.props.params.postId)
       .then((post) => {
         console.log(post);
         this.setState({

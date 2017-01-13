@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose').set('debug', true);
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./api/routes/api');

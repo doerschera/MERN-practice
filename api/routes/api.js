@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router();
-const mongoose = require('mongoose');
+
 const Post = require('../models/post');
 
 // let entry = new Post({
@@ -27,20 +27,18 @@ router.get('/api/:subreddit', (req, res) => {
 	});
 });
 
-router.get('/api/:id', (req, res) => {
-	let id = mongoose.Types.ObjectId(req.params.id);
+router.get('/api/:subreddit/:id', (req, res) => {
+	let id = req.params.id;
 	console.log(id);
 
-	Post.find({
-		subredditId: 'austin'
-	}, (err, results) => {
+	Post.findById(id, (err, results) => {
 		console.log(results);
 		res.send(results);
 	});
 })
 
 router.post('/api/:subreddit/new', (req, res) => {
-	
+
 	let title = req.body.title;
 	let content = req.body.content;
 
