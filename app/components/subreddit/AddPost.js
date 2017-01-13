@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 export default class AddPost extends React.Component {
 
@@ -23,7 +24,10 @@ export default class AddPost extends React.Component {
 
 	formSubmit(event) {
 		event.preventDefault();
-		axios.post('/api/'+this.props.params.subredditId+'/new', {title: this.state.newPostTitle, content: this.state.newPostContent}).then((response) => console.log(response));
+		axios.post('/api/'+this.props.params.subredditId+'/new', {
+      title: this.state.newPostTitle,
+      content: this.state.newPostContent
+    }).then((response) => console.log(response));
 	}
 
   render() {

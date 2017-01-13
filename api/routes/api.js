@@ -2,13 +2,13 @@
 
 const express = require('express')
 const router = express.Router();
-
+const mongoose = require('mongoose');
 const Post = require('../models/post');
 
 // let entry = new Post({
 // 	comments: [],
-// 	content: 'Fill up those lakes!',
-// 	title: "Hey, it's raining",
+// 	content: '70 and sunny',
+// 	title: "Love me some Austin winters",
 // 	subredditId: 'austin'
 // });
 //
@@ -27,7 +27,20 @@ router.get('/api/:subreddit', (req, res) => {
 	});
 });
 
-router.post('/api/new', (req, res) => {
+router.get('/api/:id', (req, res) => {
+	let id = mongoose.Types.ObjectId(req.params.id);
+	console.log(id);
+
+	Post.find({
+		subredditId: 'austin'
+	}, (err, results) => {
+		console.log(results);
+		res.send(results);
+	});
+})
+
+router.post('/api/:subreddit/new', (req, res) => {
+	
 	let title = req.body.title;
 	let content = req.body.content;
 
@@ -41,6 +54,7 @@ router.post('/api/new', (req, res) => {
 	entry.save((err, response) => {
 		if(err) console.log(err);
 
+		res.send(true);
 		console.log('post saved');
 	})
 })
