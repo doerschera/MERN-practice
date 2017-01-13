@@ -1,20 +1,38 @@
 import React from 'react';
 import axios from 'axios';
 
+import Comments from './comments';
+
 export default class Post extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      post: []
+      post: {},
+      comment: ''
     }
+    this.postComment = this.postComment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  postComment() {
+    axios.post('/api/'+this.props.params.subredditId+'/'+this.props.params.postId+'/new', {
+      comment: this.state.comment
+    }).then((result) => {console.log(result)});
+  }
+
+  handleChange(event) {
+    let text = event.target.value;
+    this.setState({
+      comment: text
+    })
   }
 
   componentWillMount() {
     console.log('getting post');
     axios.get('/api/'+this.props.params.subredditId+'/'+this.props.params.postId)
       .then((post) => {
-        console.log(post);
+        console.log(post.data);
         this.setState({
           post: post.data
         })
@@ -23,7 +41,15 @@ export default class Post extends React.Component {
 
   render() {
     return (
-      <h1>This is a post</h1>
+      <div>
+        <h2>{this.state.post.title}</h2>
+        <p>{this.state.post.content}</p>
+        <Comments
+          comments={this.state.post.comments}
+          handleChange={this.handleChange}
+          postComment={this.postComment}
+          />
+      </div>
     )
   }
 }

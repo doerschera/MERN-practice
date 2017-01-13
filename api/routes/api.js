@@ -57,4 +57,16 @@ router.post('/api/:subreddit/new', (req, res) => {
 	})
 })
 
+router.post('/api/:subreddit/:id/new', (req, res) => {
+	let comment = req.body.comment;
+	let id = req.params.id;
+
+	console.log(comment, id);
+
+	Post.findOneAndUpdate({_id: id}, {$push: {comments: comment}}).exec((err) => {
+		if(err) console.log(err);
+	})
+
+})
+
 module.exports = router;
