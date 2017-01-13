@@ -30,7 +30,7 @@ export default class Listing extends Component {
 		return (
 			<div>
 					<ul>
-						{this.state.posts.map(post => <ListItem key={post._id} post={post} />)}
+						{this.state.posts.map(post => <ListItem key={post._id} post={post} id={post._id} subredditId={post.subredditId}/>)}
 					</ul>
 			</div>
 		);
