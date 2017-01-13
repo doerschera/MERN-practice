@@ -13,14 +13,14 @@ export default class Listing extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('/posts/by-subreddit/' + this.props.params.subredditId).then(posts => {
+		axios.get('/api/' + this.props.params.subredditId).then(posts => {
 			this.setState({ posts: posts.data });
 		});
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.params.subredditId !== nextProps.params.subredditId) {
-			axios.get('/posts/by-subreddit/' + nextProps.params.subredditId).then(posts => {
+			axios.get('/api/' + nextProps.params.subredditId).then(posts => {
 				this.setState({ posts: posts.data });
 			});
 		}
@@ -28,9 +28,11 @@ export default class Listing extends Component {
 
 	render() {
 		return (
-			<ul>
-				{this.state.posts.map(post => <ListItem key={post._id} post={post} />)}
-			</ul>
+			<div>
+					<ul>
+						{this.state.posts.map(post => <ListItem key={post._id} post={post} />)}
+					</ul>
+			</div>
 		);
 	}
 }
