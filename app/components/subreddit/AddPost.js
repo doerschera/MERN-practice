@@ -36,12 +36,24 @@ export default class AddPost extends React.Component {
 	}
 
   render() {
+    const style = {
+      textTransform: 'uppercase'
+    }
+    const buttonStyle = {
+      display: 'block',
+      marginTop: 30
+    }
     return (
-      <form>
-        <input type="text" id="postTitle" value={this.state.newPostTitle} onChange={this.inputOnChange}></input>
-        <input type="text" id="postContent" onChange={this.inputOnChange} value={this.state.newPostContent}></input>
-        <button id="newPost" onClick={this.formSubmit}>Submit</button>
-      </form>
+      <div>
+        <div className="page-header"><h1 style={style}>{this.props.params.subredditId}</h1></div>
+        <form>
+          <h4>Title</h4>
+          <input type="text" id="postTitle" value={this.state.newPostTitle} onChange={this.inputOnChange}></input>
+          <h4>Content</h4>
+          <textarea id="postContent" onChange={this.inputOnChange} value={this.state.newPostContent}></textarea>
+          <button id="newPost" onClick={this.formSubmit} className="btn btn-info" style={buttonStyle}>Submit</button>
+        </form>
+      </div>
     )
   }
 }

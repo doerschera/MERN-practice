@@ -19,11 +19,16 @@ export default class Comments extends React.Component {
   }
 
   render() {
+    const style = {
+      marginTop: 30
+    }
     return (
       <div>
+        <h4 style={style}>Comments</h4>
         <div>
             {this.displayComments()}
         </div>
+        <h4 style={style}>Add Comment</h4>
         <form className="form-group">
           <textarea
             value={this.props.comment} onChange={this.props.handleChange}
@@ -32,6 +37,7 @@ export default class Comments extends React.Component {
           <button
             onClick={this.props.postComment}
             className="btn btn-info"
+            style={style}
             >Submit</button>
         </form>
       </div>
